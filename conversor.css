@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+input, select, button {
+    padding: 10px;
+}
+.container {
+    border: solid 1px #aaa;
+    padding: 50px;
+    text-align: center;
+    margin-top: 50px;
+}
+h1{
+    margin-bottom: 50px;
+}
+.divResultado{
+    margin-top: 50px;
+}
+.result {
+    font-size: 20px;
+    font-weight: bold;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moedas</title>
+    <link rel="stylesheet" href="conversor.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="titulo">Chico de Moedas</h1>
+        <input type="text" id="valor-usuario">
+        <select name="moeda1" id="moeda1">
+            <option value="real">Real</option>
+            <option value="dolar">Dolar</option>
+            <option value="euro">Euro</option>
+        </select>
+        <button onclick="inverter()">Inverter</button>
+        <select name="moeda2" id="moeda2">
+            <option value="real">Real</option>
+            <option value="dolar">Dolar</option>
+            <option value="euro">Euro</option>
+        </select>
+        <button onclick="converter()">Converter</button>
+        <div class="divResultado">
+            <h2>Resultado:</h4>
+            <p class="result" id="resultado"></p>
+        </div>
+    </div>
+
+
+    <br><br><br>
+    <a href="index.html"><button>Index</button></a>
+
+    <script src="conversorScript.js"></script>
+</body>
+
+</html>
