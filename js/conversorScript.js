@@ -15,6 +15,15 @@ let valoresConversao = {
         euro: 1
     }
 }
+let botaoEnter = document.querySelector("#botaoConverter")
+
+document.addEventListener("keypress", function (e) {
+    if (e.key === 'Enter') {
+
+        botaoEnter.click();
+
+    }
+});
 
 function converter() {
     let valorUsuario = document.getElementById("valor-usuario").value;
