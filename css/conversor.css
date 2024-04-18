@@ -23,3 +23,22 @@ h1{
     font-size: 20px;
     font-weight: bold;
 }
+.mensagem-usuario {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border: 1px solid black;
+    border-radius: 35px;
+    max-width: 50%; /* Defina o tamanho máximo para evitar que a mensagem ocupe toda a largura */
+    box-sizing: border-box; /* Inclui padding e borda no cálculo da largura */
+}
+
+.oculto {
+    display: none;
+}

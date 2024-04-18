@@ -15,7 +15,24 @@ let valoresConversao = {
         euro: 1
     }
 }
+
+let botaoConverter = document.getElementById("botaoConverter");
+botaoConverter.addEventListener("click", converter);
+
+let botaoInverter = document.getElementById("botaoInverter");
+botaoInverter.addEventListener("click", inverter);
+
+let botaoLimpar = document.getElementById("botaoLimpar");
+botaoLimpar.addEventListener("click", limpar);
+
+let botaoAceitaMensagem = document.getElementById("botao-aceita-mensagem");
+botaoAceitaMensagem.addEventListener("click", aceitaMensagem);
+
 let botaoEnter = document.querySelector("#botaoConverter")
+
+if (localStorage.getItem("aceitouCookie") == "1") {
+    aceitaMensagem();
+}
 
 document.addEventListener("keypress", function (e) {
     if (e.key === 'Enter') {
@@ -51,3 +68,19 @@ function inverter() {
     document.getElementById("moeda1").value = moeda2;
     document.getElementById("moeda2").value = moeda1;
 }
+
+function limpar() {
+    let valorUsuario = document.getElementById("valor-usuario");
+    let resultado = document.getElementById("resultado");
+
+    valorUsuario.value = "";
+    resultado.textContent = "";
+}
+
+function aceitaMensagem() {
+    let divMensagemUsuario = document.getElementById("container-mensagem-usuario");
+    divMensagemUsuario.classList.add("oculto");
+
+    localStorage.setItem("aceitouCookie", "1");
+}
+
