@@ -34,6 +34,11 @@ if (localStorage.getItem("aceitouCookie") == "1") {
     aceitaMensagem();
 }
 
+function salvarResltadoHistorico(conversao) {
+    let conversaoEmJson = JSON.stringify(conversao)
+    localStorage.setItem("historico", conversaoEmJson)
+}
+
 document.addEventListener("keypress", function (e) {
     if (e.key === 'Enter') {
 
@@ -59,6 +64,13 @@ function converter() {
         paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'EUR' });
     }
 
+    let resultadoDaConversao = {
+        valor: valorUsuario,
+        moeda1: moedaOrigem,
+        moeda2: moedaDestino,
+        resultado: conversao
+    }
+    salvarResltadoHistorico(resultadoDaConversao);
 }
 
 function inverter() {
