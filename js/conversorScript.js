@@ -39,6 +39,11 @@ function salvarResltadoHistorico(conversao) {
     localStorage.setItem("historico", conversaoEmJson)
 }
 
+function recuperarHistoricoDeConversao() {
+    let historico = localStorage.getItem("historico")
+    let historicoConvertido = JSON.parse(historico)
+}
+
 document.addEventListener("keypress", function (e) {
     if (e.key === 'Enter') {
 
