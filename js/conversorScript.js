@@ -66,7 +66,8 @@ function converter() {
     let moedaOrigem = document.getElementById("moeda1").value;
     let moedaDestino = document.getElementById("moeda2").value;
     let paragrafoResultado = document.getElementById("resultado");
-
+    let h2result = document.getElementById("h2result");
+    
     let conversao = valorUsuario * valoresConversao[moedaOrigem][moedaDestino]
 
 
@@ -77,6 +78,7 @@ function converter() {
     } else {
         paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'EUR' });
     }
+    h2result.textContent = "Resultado:"
 
     let resultadoDaConversao = {
         valor: valorUsuario,
@@ -98,9 +100,11 @@ function inverter() {
 function limpar() {
     let valorUsuario = document.getElementById("valor-usuario");
     let resultado = document.getElementById("resultado");
+    let h2result = document.getElementById("h2result");
 
     valorUsuario.value = "";
     resultado.textContent = "";
+    h2result.textContent = "";
 }
 
 function aceitaMensagem() {
