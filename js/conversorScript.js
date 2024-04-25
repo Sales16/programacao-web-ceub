@@ -67,7 +67,7 @@ function converter() {
     let moedaDestino = document.getElementById("moeda2").value;
     let paragrafoResultado = document.getElementById("resultado");
     let h2result = document.getElementById("h2result");
-    
+
     let conversao = valorUsuario * valoresConversao[moedaOrigem][moedaDestino]
 
 
@@ -114,3 +114,22 @@ function aceitaMensagem() {
     localStorage.setItem("aceitouCookie", "1");
 }
 
+
+
+
+
+
+
+
+
+
+const themeSwitch = document.getElementById('themeSwitch');
+
+themeSwitch.addEventListener('change', () => {
+    if (themeSwitch.checked) {
+        // Aplicando cores escuras
+        document.documentElement.style.setProperty('--background-cor', 'white');
+        document.documentElement.style.setProperty('--card-cor', '#e8e8e8');
+        document.documentElement.style.setProperty('--text-cor', 'black');
+    } 
+});
