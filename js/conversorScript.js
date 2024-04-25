@@ -35,13 +35,22 @@ if (localStorage.getItem("aceitouCookie") == "1") {
 }
 
 function salvarResltadoHistorico(conversao) {
-    let conversaoEmJson = JSON.stringify(conversao)
-    localStorage.setItem("historico", conversaoEmJson)
+    let historico = recuperarHistoricoDeConversao();
+
+    historico.push(conversao);
+
+    historico = JSON.stringify(historico)
+    localStorage.setItem("historico", historico)
 }
 
 function recuperarHistoricoDeConversao() {
     let historico = localStorage.getItem("historico")
+
+    if (!historico) {
+        return [];
+    }
     let historicoConvertido = JSON.parse(historico)
+    return historicoConvertido;
 }
 
 document.addEventListener("keypress", function (e) {

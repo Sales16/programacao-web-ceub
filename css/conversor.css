@@ -42,3 +42,15 @@ h1{
 .oculto {
     display: none;
 }
+
+.footer {
+    margin-left: 3%;
+}
+.voltar {
+    padding: 20px 50px;
+    border-radius: 100px;
+}
+.voltar:hover {
+    background-color: #b4b4b4;
+    cursor: pointer;
+}
