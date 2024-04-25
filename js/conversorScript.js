@@ -34,6 +34,16 @@ if (localStorage.getItem("aceitouCookie") == "1") {
     aceitaMensagem();
 }
 
+function buscaAPI() {
+    let url = "https://economia.awesomeapi.com.br/json/last/USD-BRL"
+    fetch(url).then(function(data){
+        if(data.status == 200){
+            console.log("retorno ok")
+        }
+        console.log(data);
+    }).catch()
+}
+
 function salvarResltadoHistorico(conversao) {
     let historico = recuperarHistoricoDeConversao();
 
@@ -62,6 +72,8 @@ document.addEventListener("keypress", function (e) {
 });
 
 function converter() {
+    buscaAPI();
+
     let valorUsuario = document.getElementById("valor-usuario").value;
     let moedaOrigem = document.getElementById("moeda1").value;
     let moedaDestino = document.getElementById("moeda2").value;
@@ -123,7 +135,7 @@ function aceitaMensagem() {
 
 
 
-const themeSwitch = document.getElementById('themeSwitch');
+const themeSwitch = document.getElementById('checkboxTheme');
 
 themeSwitch.addEventListener('change', () => {
     if (themeSwitch.checked) {
@@ -131,5 +143,10 @@ themeSwitch.addEventListener('change', () => {
         document.documentElement.style.setProperty('--background-cor', 'white');
         document.documentElement.style.setProperty('--card-cor', '#e8e8e8');
         document.documentElement.style.setProperty('--text-cor', 'black');
-    } 
+    } else {
+        // Aplicando cores claras
+        document.documentElement.style.setProperty('--background-cor', '#171717');
+        document.documentElement.style.setProperty('--card-cor', '#212121');
+        document.documentElement.style.setProperty('--text-cor', '#ffffff');
+    }
 });

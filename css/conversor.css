@@ -244,7 +244,7 @@ input:checked+.slider:before {
   }
 
 .select-moedas {
-    padding: 15px;
+    padding: 14px;
     border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
