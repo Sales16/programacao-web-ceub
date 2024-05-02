@@ -1,21 +1,3 @@
-let valoresConversao = {
-    real: {
-        dolar: 0.27,
-        euro: 0.18,
-        real: 1
-    },
-    dolar: {
-        real: 5.03,
-        euro: 1.09,
-        dolar: 1
-    },
-    euro: {
-        real: 5.47,
-        dolar: 0.92,
-        euro: 1
-    }
-}
-
 let botaoConverter = document.getElementById("botaoConverter");
 botaoConverter.addEventListener("click", converter);
 
@@ -28,19 +10,26 @@ botaoLimpar.addEventListener("click", limpar);
 let botaoAceitaMensagem = document.getElementById("botao-aceita-mensagem");
 botaoAceitaMensagem.addEventListener("click", aceitaMensagem);
 
-let botaoEnter = document.querySelector("#botaoConverter")
+document.addEventListener("keypress", function (e) {
+    if (e.key === 'Enter') {
+        converter();
+    }
+});
 
 if (localStorage.getItem("aceitouCookie") == "1") {
     aceitaMensagem();
 }
 
-function buscaAPI() {
-    let url = "https://economia.awesomeapi.com.br/json/last/USD-BRL"
-    fetch(url).then(function(data){
-        if(data.status == 200){
-            console.log("retorno ok")
+function buscaAPI(moedaOrigem = "USD", moedaDestino = "BRL") {
+    let parameto = moedaOrigem + "-" + moedaDestino;
+    let url = "https://economia.awesomeapi.com.br/json/last/" + parameto;
+    return fetch(url).then(function (data) {
+        if (data.status == 200) {
+            console.log("Retorno código 200 API")
         }
-        console.log(data);
+        return data.json();
+    }).then(function (response) {
+        return response[moedaOrigem + moedaDestino];
     }).catch()
 }
 
@@ -63,42 +52,37 @@ function recuperarHistoricoDeConversao() {
     return historicoConvertido;
 }
 
-document.addEventListener("keypress", function (e) {
-    if (e.key === 'Enter') {
-
-        botaoEnter.click();
-
-    }
-});
-
 function converter() {
-    buscaAPI();
-
     let valorUsuario = document.getElementById("valor-usuario").value;
     let moedaOrigem = document.getElementById("moeda1").value;
-    let moedaDestino = document.getElementById("moeda2").value;
+    let moedaDestino = document.getElementById("moeda2").value
     let paragrafoResultado = document.getElementById("resultado");
     let h2result = document.getElementById("h2result");
 
-    let conversao = valorUsuario * valoresConversao[moedaOrigem][moedaDestino]
-
-
-    if (moedaDestino == "dolar") {
-        paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' });
-    } else if (moedaDestino == "real") {
-        paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    } else {
-        paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'EUR' });
+    if (valorUsuario < 0) {
+        alert("Valor não pode ser negativo");
+        return;
     }
-    h2result.textContent = "Resultado:"
+    buscaAPI(moedaOrigem, moedaDestino).then(function (response) {
+        let conversao = valorUsuario * response["ask"];
 
-    let resultadoDaConversao = {
-        valor: valorUsuario,
-        moeda1: moedaOrigem,
-        moeda2: moedaDestino,
-        resultado: conversao
-    }
-    salvarResltadoHistorico(resultadoDaConversao);
+        if (moedaDestino == "USD") {
+            paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' });
+        } else if (moedaDestino == "BRL") {
+            paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        } else {
+            paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'EUR' });
+        }
+        h2result.textContent = "Resultado:"
+    
+        let resultadoDaConversao = {
+            valor: valorUsuario,
+            moeda1: moedaOrigem,
+            moeda2: moedaDestino,
+            resultado: conversao
+        }
+        salvarResltadoHistorico(resultadoDaConversao);
+    });
 }
 
 function inverter() {
@@ -126,25 +110,14 @@ function aceitaMensagem() {
     localStorage.setItem("aceitouCookie", "1");
 }
 
-
-
-
-
-
-
-
-
-
 const themeSwitch = document.getElementById('checkboxTheme');
 
 themeSwitch.addEventListener('change', () => {
     if (themeSwitch.checked) {
-        // Aplicando cores escuras
         document.documentElement.style.setProperty('--background-cor', 'white');
         document.documentElement.style.setProperty('--card-cor', '#e8e8e8');
         document.documentElement.style.setProperty('--text-cor', 'black');
     } else {
-        // Aplicando cores claras
         document.documentElement.style.setProperty('--background-cor', '#171717');
         document.documentElement.style.setProperty('--card-cor', '#212121');
         document.documentElement.style.setProperty('--text-cor', '#ffffff');
