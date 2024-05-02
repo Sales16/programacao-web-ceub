@@ -70,8 +70,12 @@ function converter() {
             paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' });
         } else if (moedaDestino == "BRL") {
             paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        } else {
+        } else if (moedaDestino == "EUR") {
             paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'EUR' });
+        } else if (moedaDestino == "GBP") {
+            paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'GBP' })
+        } else {
+            paragrafoResultado.textContent = conversao.toLocaleString('pt-BR', { style: 'currency', currency: 'BTC' })
         }
         h2result.textContent = "Resultado:"
     
